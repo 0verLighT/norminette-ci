@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -euo pipefail
 
 if [[ "$NORM_GLOBAL_ALLOWED" == "true" ]]; then
      ( norminette $NORM_PATHS || true ) | grep -E ".+\.[ch]: Error\!|^Error:" && exit 1 || exit 0
