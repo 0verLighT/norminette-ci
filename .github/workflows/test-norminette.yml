@@ -1,0 +1,47 @@
+name: "Norminette"
+
+on:
+  push:
+    branches:
+      - "master"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  norminette-fail:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: "norminette fail"
+        id: norm
+        uses: ./
+        with:
+          paths: tests/error
+        continue-on-error: true
+      - name: "assert it failed"
+        if: steps.norm.outcome != 'failure'
+        run: |
+          echo "::error::norminette should have failed on tests/error"
+          exit 1
+
+  norminette-global-allowed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        
+      - name: "norminette global allowed"
+        uses: ./
+        with:
+          paths: tests/global
+          global-allowed: true
+
+  norminette-success:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: "norminette success"
+        uses: ./
+        with:
+          paths: tests/valid

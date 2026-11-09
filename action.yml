@@ -1,5 +1,5 @@
 name: "Norminette"
-description: "Run the 42 norminette to linter on C sources"
+description: "Run the 42 norminette to lint on C sources"
 author: 0verlight
 branding:
   icon: flag
@@ -10,7 +10,7 @@ inputs:
     required: false
     default: "."
   global-allowed:
-    description: "Global allowed"
+    description: "If true, global variable notices don't fail the check"
     required: false
     default: "false"
   python-version:
@@ -27,7 +27,6 @@ runs:
     - shell: bash
       run: |
           python3 -m pip install -U norminette
-    
     - shell: bash
       env:
          NORM_PATHS: ${{ inputs.paths }}
