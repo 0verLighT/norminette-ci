@@ -1,4 +1,4 @@
-name: "Norminette"
+name: "norminette-ci"
 description: "Run the 42 norminette to lint on C sources"
 author: 0verlight
 branding:
